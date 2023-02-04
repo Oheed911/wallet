@@ -5,11 +5,13 @@ class Wallet:
         self.balance = balance
 
     def setAmmount(self, ammount):
-        self.balance += ammount
+        self.balance = ammount
+        return self.balance
 
     def getAmmount(self, ammount):
-        self.balance -= ammount
+        return self.balance
 
     def removeAmmount(self):
         self.balance = 0
+        return self.balance
         
