@@ -15,7 +15,7 @@ class TestWallet(unittest.TestCase):
 
     def test_remove_ammount(self):
         self.assertEqual(self.wallet.removeAmmount(), 0)
+        print("hahah")
 
 if __name__ == '__main__':
     unittest.main()
-    
