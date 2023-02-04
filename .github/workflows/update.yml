@@ -1,18 +1,24 @@
-#create a workflow that should automate the unit testing
-name: Update
-on:
-  push:
-    branches:
-      - master
+name: Automated Testing
+
+on: [push]
+
 jobs:
-  update:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
-      - name: Update
-        run: |
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
-          git remote set-url origin
-          git pull
-          git push
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python environment
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Install dependencies
+      run: |
+        pip install unittest
+
+    - name: Run Tests
+      run: |
+        python -m unittest test.py
