@@ -1,0 +1,17 @@
+# write update.yml file
+- name: write update.yml file
+  template:
+    src: update.yml.j2
+    dest: /tmp/update.yml
+    mode: 0644
+
+# run update.yml
+- name: run update.yml
+  shell: ansible-playbook /tmp/update.yml
+
+# remove update.yml
+- name: remove update.yml
+  file:
+    path: /tmp/update.yml
+    state: absent
+
