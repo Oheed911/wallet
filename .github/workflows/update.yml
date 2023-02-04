@@ -1,17 +1,18 @@
-# write update.yml file
-- name: write update.yml file
-  template:
-    src: update.yml.j2
-    dest: /tmp/update.yml
-    mode: 0644
-
-# run update.yml
-- name: run update.yml
-  shell: ansible-playbook /tmp/update.yml
-
-# remove update.yml
-- name: remove update.yml
-  file:
-    path: /tmp/update.yml
-    state: absent
-
+#create a workflow that should automate the unit testing
+name: Update
+on:
+  push:
+    branches:
+      - master
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Update
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git remote set-url origin
+          git pull
+          git push
